@@ -43,6 +43,10 @@ Returns:
 ```
 Use the number 2694
 
+## Sample screenshot
+![MMM-TRV-WastePlan module for MagicMirror](https://raw.githubusercontent.com/reidarw/MMM-TRV-WastePlan/main/MMM-TRV-Wasteplan.png "MMM-TRV-WastePlan module for MagicMirror")
+
+
 ## Optional Config
 | **Option** | **Description** |
 | --- | --- |
