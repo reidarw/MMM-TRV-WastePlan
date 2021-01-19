@@ -37,15 +37,12 @@ and insert your own id.
 The id can be found at https://trv.no/wp-json/wasteplan/v1/bins/?s=Your+street+name
 
 Example: https://trv.no/wp-json/wasteplan/v1/bins/?s=Lokes+veg
+
 Returns:
 ```
 [{"name":"Lokes veg","type":"BINS","plan":"P6","calendar":null,"deviations":null,"plans_by_year":{"2020":"P6","2021":"P6"},"id":2694}]
 ```
 Use the number 2694
-
-## Sample screenshot
-![MMM-TRV-WastePlan module for MagicMirror](https://raw.githubusercontent.com/reidarw/MMM-TRV-WastePlan/main/MMM-TRV-Wasteplan.png "MMM-TRV-WastePlan module for MagicMirror")
-
 
 ## Optional Config
 | **Option** | **Description** |
@@ -60,3 +57,30 @@ Use the number 2694
 | `blnLabel` | Display label. Default: false |
 | `blnIcon` | Display the same icons as your trash bin uses. Default: true |
 | `updateInterval` | Interval to update the next pickup dates, in milliseconds. Default: 6 hours |
+
+
+## Sample screenshot
+
+Default:
+
+![MMM-TRV-WastePlan module for MagicMirror](screenshots/default.png "MMM-TRV-WastePlan module for MagicMirror")
+
+
+With label and date:
+```
+blnLabel: true,
+blnNumberOfDays: false,
+blnDate: true,
+```
+![MMM-TRV-WastePlan module for MagicMirror](screenshots/label_date.png "MMM-TRV-WastePlan module for MagicMirror")
+
+
+Compact view (this week):
+```
+header: '',
+numberOfWeeks: 1,
+blnLabel: true,
+blnNumberOfDays: false,
+``` 
+![MMM-TRV-WastePlan module for MagicMirror](screenshots/compact.png "MMM-TRV-WastePlan module for MagicMirror")
+               
