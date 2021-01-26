@@ -17,6 +17,7 @@ Module.register("MMM-TRV-WastePlan", {
         blnWeekNumber: false,
         blnLabel: false,
         blnIcon: true,
+        minWidth: 160,
         updateInterval: 6 * 60 * 60 * 1000 // 6 hours
     },
 
@@ -107,6 +108,9 @@ Module.register("MMM-TRV-WastePlan", {
 
     getDom: function() {
         let wrapper = document.createElement("div");
+        if (this.config.minWidth) {
+            wrapper.style.minWidth = this.config.minWidth + 'px';
+        }
 
         if (this.loaded === false) {
             wrapper.innerHTML = this.translate("loading") + '...';

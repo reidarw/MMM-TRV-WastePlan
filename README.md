@@ -44,7 +44,7 @@ Returns:
 ```
 Use the number 2694
 
-## Optional Config
+## Optional config
 | **Option** | **Description** |
 | --- | --- |
 | `header` | Alternative header. Set as empty string to remove. Default: "Tømmeplan" |
@@ -56,6 +56,7 @@ Use the number 2694
 | `blnWeekNumber` | Display week number. Default: false |
 | `blnLabel` | Display label. Default: false |
 | `blnIcon` | Display the same icons as your trash bin uses. Default: true |
+| `minWidth` | Minimum width on container in pixels. Default: 160 |
 | `updateInterval` | Interval to update the next pickup dates, in milliseconds. Default: 6 hours |
 
 
