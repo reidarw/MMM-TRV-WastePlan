@@ -10,6 +10,7 @@ module.exports = node_helper.create({
             request({
                 method: 'GET',
                 uri: url,
+                rejectUnauthorized: false,
             }, function (error, response, body) {
                 if (!error && response.statusCode === 200) {
                     returnData = JSON.parse(body);
