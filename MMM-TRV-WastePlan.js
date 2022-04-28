@@ -17,7 +17,7 @@ Module.register("MMM-TRV-WastePlan", {
         blnWeekNumber: false,
         blnLabel: false,
         blnIcon: true,
-        minWidth: 160,
+        minWidth: 120,
         updateInterval: 6 * 60 * 60 * 1000 // 6 hours
     },
 
@@ -131,7 +131,14 @@ Module.register("MMM-TRV-WastePlan", {
             wrapper.appendChild(headerContainer);
         }
 
-        for (i = 0; i < this.config.numberOfWeeks; i++) {
+        let weeks = this.config.numberOfWeeks;
+        let weekPrinted = false;
+        let showOnlyOneWeek = this.config.numberOfWeeks === 1;
+        if (showOnlyOneWeek) {
+            weeks++;
+        }
+
+        for (i = 0; i < weeks; i++) {
             weekContainer = document.createElement("div");
             weekContainer.className = 'trv-waste-plan-week-container';
             labelContainer = document.createElement("div");
@@ -170,7 +177,17 @@ Module.register("MMM-TRV-WastePlan", {
             if (pickUpDate < today) {
                 weekContainer.className = 'trv-waste-plan-week-container dimmed light';
             }
-            wrapper.appendChild(weekContainer);
+
+            let showData = true;
+            if (showOnlyOneWeek && (today > pickUpDate || weekPrinted)) {
+                showData = false;
+            }
+
+            if (showData) {
+                wrapper.appendChild(weekContainer);
+                weekPrinted = true;
+            }
+
         }
 
         return wrapper;
