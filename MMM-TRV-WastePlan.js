@@ -18,7 +18,8 @@ Module.register("MMM-TRV-WastePlan", {
         blnLabel: false,
         blnIcon: true,
         minWidth: 120,
-        updateInterval: 6 * 60 * 60 * 1000 // 6 hours
+        updateInterval: 6 * 60 * 60 * 1000, // 6 hours
+        hideNoPickup: false
     },
 
     start: function() {
@@ -145,6 +146,9 @@ Module.register("MMM-TRV-WastePlan", {
             weekInfo = this.wastePlan.calendar[i];
             let pickUpDate = moment(weekInfo.date_week_start).add(this.config.weekDay, 'days');
 
+            if (this.config.hideNoPickup === true && weekInfo.wastetype_en === 'No pickup') {
+                continue;
+            }
             if (config.language === 'en') {
                 wasteType = weekInfo.wastetype_en;
             } else {

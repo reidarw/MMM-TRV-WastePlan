@@ -58,6 +58,7 @@ Use the number 2694
 | `blnIcon` | Display the same icons as your trash bin uses. Default: true |
 | `minWidth` | Minimum width on container in pixels. Default: 160 |
 | `updateInterval` | Interval to update the next pickup dates, in milliseconds. Default: 6 hours |
+| `hideNoPickup` | Hide no pickup entry. Default: false |
 
 
 ## Sample screenshot
