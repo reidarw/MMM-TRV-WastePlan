@@ -1,3 +1,6 @@
+# Important note
+The TRV API v1 is no longer operational, and it appears that the provider has no intention of granting access to v2, resulting in the inability of this component to function. See also: https://github.com/jonkristian/wasteplan_trv/issues/13
+
 # MMM-TRV-WastePlan
 A MagicMirror2 module for showing the waste plan for your destination in Trondheim, Norway.
 
