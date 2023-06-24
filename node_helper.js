@@ -5,7 +5,7 @@ module.exports = node_helper.create({
     socketNotificationReceived: function (notification, payload) {
         const self = this;
         if (notification === "GET_WASTE_PLAN") {
-            const url = 'https://trv.no/wp-json/wasteplan/v1/calendar/' + payload.config.id;
+            const url = 'https://trv.no/wp-json/wasteplan/v2/calendar/' + payload.config.id;
             let returnData = {error: true};
             request({
                 method: 'GET',
