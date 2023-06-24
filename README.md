@@ -1,7 +1,4 @@
-# Important note
-The TRV API v1 is no longer operational, and it appears that the provider has no intention of granting access to v2, resulting in the inability of this component to function. See also: https://github.com/jonkristian/wasteplan_trv/issues/13
-
-## MMM-TRV-WastePlan
+# MMM-TRV-WastePlan
 A MagicMirror2 module for showing the waste plan for your destination in Trondheim, Norway.
 
 ##### Inspired by:
@@ -32,39 +29,38 @@ and insert your own id.
     module: 'MMM-TRV-WastePlan',
     position: 'top_left',
     config: {
-        id: 2694
+        id: 'e7853926-00f5-43ca-97b3-f013549b317b'
     }
  },
 ```
 **Note:** 
-The id can be found at https://trv.no/wp-json/wasteplan/v1/bins/?s=Your+street+name
+The id can be found at https://trv.no/wp-json/wasteplan/v2/adress/?s=Your+street+name+21
 
-Example: https://trv.no/wp-json/wasteplan/v1/bins/?s=Lokes+veg
+Example:  https://trv.no/wp-json/wasteplan/v2/adress/?s=Lokes+veg+24
 
 Returns:
 ```
-[{"name":"Lokes veg","type":"BINS","plan":"P6","calendar":null,"deviations":null,"plans_by_year":{"2020":"P6","2021":"P6"},"id":2694}]
+[{"id":"e7853926-00f5-43ca-97b3-f013549b317b","adresse":"Lokes Veg 24"}]
 ```
-Use the number 2694
+Use the ID e7853926-00f5-43ca-97b3-f013549b317b
 
 ## Optional config
 | **Option** | **Description** |
 | --- | --- |
 | `header` | Alternative header. Set as empty string to remove. Default: "Tømmeplan" |
-| `numberOfWeeks` | Number of weeks to display. Default: 5 |
+| `numberOfWeeks` | Number of weeks to display. Default: 3 |
 | `weekDay` | The number of the day in the week when the trash usually get picked up. Monday = 0, Tuesday = 1, Wednesday = 2, Thursday = 3, Friday = 4. Default: 3 |
 | `blnNumberOfDays` | Display number of days until pickup. Default: true |
 | `blnDate` | Display date for next pickup. Default: false |
 | `dateFormat` | If blnDate is true, this date format will be used. Default: DD. MMM |
-| `blnWeekNumber` | Display week number. Default: false |
 | `blnLabel` | Display label. Default: false |
 | `blnIcon` | Display the same icons as your trash bin uses. Default: true |
 | `minWidth` | Minimum width on container in pixels. Default: 160 |
 | `updateInterval` | Interval to update the next pickup dates, in milliseconds. Default: 6 hours |
-| `hideNoPickup` | Hide no pickup entry. Default: false |
 
 
 ## Sample screenshot
+### Update 2023-06: Screenshots are not updated. New icons and new garbage types are now supported after API v2 became available. 
 
 Default:
 
