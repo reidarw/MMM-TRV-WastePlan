@@ -6,20 +6,18 @@
 
 Module.register("MMM-TRV-WastePlan", {
     defaults: {
-        // Find your ID here: https://trv.no/wp-json/wasteplan/v1/bins/?s=Lokes+veg
-        id: 2694,
+        // Find your ID here: https://trv.no/wp-json/wasteplan/v2/adress/?s=Your+Address+12
+        id: 'e7853926-00f5-43ca-97b3-f013549b317b',
         header: 'Tømmeplan',
-        numberOfWeeks: 5,
-        weekDay: 3, // Thursday
+        numberOfWeeks: 3,
+        weekDay: 0, // Monday
         blnNumberOfDays: true,
         blnDate: false,
         dateFormat: "DD. MMM",
-        blnWeekNumber: false,
         blnLabel: false,
         blnIcon: true,
         minWidth: 120,
         updateInterval: 6 * 60 * 60 * 1000, // 6 hours
-        hideNoPickup: false
     },
 
     start: function() {
@@ -56,7 +54,7 @@ Module.register("MMM-TRV-WastePlan", {
 
     socketNotificationReceived: function(notification, payload) {
         if (notification === "WASTE_PLAN") {
-            this.wastePlan = payload;
+            this.wastePlan = payload; 
             this.loaded = true;
             this.updateDom(1000);
         }
@@ -70,27 +68,7 @@ Module.register("MMM-TRV-WastePlan", {
     },
 
     getIcon: function(type) {
-        let icon;
-        switch (type) {
-            case 'No pickup':
-                icon = 'no-pickup';
-                break;
-            case 'Non-recyclable waste':
-                icon = 'non-recyclable';
-                break;
-            case 'Paper':
-                icon = 'paper';
-                break;
-            case 'Plastic':
-                icon = 'plastic';
-                break;
-            case 'Garden waste':
-                icon ='garden';
-                break;
-            default:
-                icon = 'no-pickup';
-        }
-        return '<div class="trv-waste-plan-icon ' + icon + '"></div>';
+        return '<div class="trv-waste-plan-icon symbol-id-' + type + '"></div>';
     },
 
     getNumberOfDaysLabel: function(today, pickUpDate) {
@@ -134,6 +112,7 @@ Module.register("MMM-TRV-WastePlan", {
 
         let weeks = this.config.numberOfWeeks;
         let weekPrinted = false;
+        let lastPickUpDate;
         let showOnlyOneWeek = this.config.numberOfWeeks === 1;
         if (showOnlyOneWeek) {
             weeks++;
@@ -144,16 +123,9 @@ Module.register("MMM-TRV-WastePlan", {
             weekContainer.className = 'trv-waste-plan-week-container';
             labelContainer = document.createElement("div");
             weekInfo = this.wastePlan.calendar[i];
-            let pickUpDate = moment(weekInfo.date_week_start).add(this.config.weekDay, 'days');
-
-            if (this.config.hideNoPickup === true && weekInfo.wastetype_en === 'No pickup') {
-                continue;
-            }
-            if (config.language === 'en') {
-                wasteType = weekInfo.wastetype_en;
-            } else {
-                wasteType = weekInfo.wastetype;
-            }
+            let pickUpDate = moment(weekInfo.dato).add(this.config.weekDay, 'days');
+        
+            wasteType = weekInfo.fraksjon;
             trashInfo = this.config.blnLabel ? wasteType : '';
             if (this.config.blnDate) {
                 trashInfo += trashInfo ? ' - ' : '';
@@ -164,12 +136,8 @@ Module.register("MMM-TRV-WastePlan", {
                     ? ' (' + this.getNumberOfDaysLabel(today, pickUpDate) + ')'
                     : this.getNumberOfDaysLabel(today, pickUpDate);
             }
-            if (this.config.blnWeekNumber) {
-                trashInfo += trashInfo ? ' - ' : '';
-                trashInfo += this.translate("week") + ' '  + weekInfo.week;
-            }
             if (this.config.blnIcon) {
-                weekContainer.innerHTML = this.getIcon(weekInfo.wastetype_en);
+                weekContainer.innerHTML = this.getIcon(weekInfo.symbolId);
             } else {
                 weekContainer.appendChild(document.createElement("div"));
             }
@@ -187,11 +155,15 @@ Module.register("MMM-TRV-WastePlan", {
                 showData = false;
             }
 
+            if (showOnlyOneWeek && lastPickUpDate && lastPickUpDate.isSame(pickUpDate)) {
+                showData = true;
+            }
+
             if (showData) {
                 wrapper.appendChild(weekContainer);
                 weekPrinted = true;
+                lastPickUpDate = pickUpDate;
             }
-
         }
 
         return wrapper;
